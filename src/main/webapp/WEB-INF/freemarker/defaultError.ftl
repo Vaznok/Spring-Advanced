@@ -3,6 +3,6 @@
     <title>Error</title>
 </head>
 <body>
-    <h1>Error message: ${message}</h1>
+    <h4>Error message: ${message}</h4>
 </body>
 </html>

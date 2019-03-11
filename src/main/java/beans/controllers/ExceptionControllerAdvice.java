@@ -8,8 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class ExceptionControllerAdvice {
     @ExceptionHandler
     public ModelAndView handleMyException(Exception e) {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("defaultError", e.getMessage());
+        ModelAndView mav = new ModelAndView("defaultError");
+        mav.addObject("message", e.getMessage());
         return mav;
     }
 }

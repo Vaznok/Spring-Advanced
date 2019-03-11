@@ -30,12 +30,4 @@ public class UserController {
         ModelAndView mav = new ModelAndView("users");
         return mav.addObject("users", Arrays.asList(userService.getUserByEmail(email)));
     }
-
-/*    @RequestMapping
-    public ModelAndView getUsersByName (@RequestParam String userName) {
-        List<User> users = userService.getUsersByName(userName);
-        ModelAndView mav = new ModelAndView("users");
-        mav.addObject("users", users);
-        return mav;
-    }*/
 }

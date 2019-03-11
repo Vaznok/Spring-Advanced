@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 import java.util.List;
 
-@Controller("/upload")
+@Controller
 public class UploadController {
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -31,12 +31,12 @@ public class UploadController {
         this.userService = userService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String showUploadPage() {
         return "uploader";
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = "multipart/form-data")
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ModelAndView uploadFiles(@RequestParam(required = false) MultipartFile fileUsers,
                                     @RequestParam(required = false) MultipartFile fileEvents) throws IOException {
 
