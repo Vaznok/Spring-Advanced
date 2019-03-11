@@ -1,5 +1,8 @@
 package beans.models;
 
+import beans.json.LocalDateDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.time.LocalDate;
 
 /**
@@ -13,6 +16,7 @@ public class User {
     private long      id;
     private String    email;
     private String    name;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate birthday;
 
     public User() {

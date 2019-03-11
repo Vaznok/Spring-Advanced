@@ -3,16 +3,20 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+ 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
     <mvc:annotation-driven />
-    <context:component-scan base-package="controllers" />
+    <context:component-scan base-package="beans"/>
+    <aop:aspectj-autoproxy/>
     <mvc:default-servlet-handler />
 
     <!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -25,6 +29,7 @@
         <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="order" value="0" />
     </bean>
 
     <!-- freemarker config -->
@@ -35,5 +40,16 @@
                 <prop key="default_encoding">UTF-8</prop>
             </props>
         </property>
+    </bean>
+
+    <bean class = "org.springframework.web.servlet.view.ResourceBundleViewResolver">
+        <property name = "basename" value = "views"/>
+        <property name="order" value="1" />
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="400000" />
+        <property name="maxInMemorySize" value="90000" />
     </bean>
 </beans>

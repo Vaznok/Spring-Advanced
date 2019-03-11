@@ -1,5 +1,10 @@
 package beans.models;
 
+import beans.json.AuditoriumDeserializer;
+import beans.json.LocalDateDeserializer;
+import beans.json.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.time.LocalDateTime;
 
 /**
@@ -14,7 +19,9 @@ public class Event {
     private String        name;
     private Rate          rate;
     private double        basePrice;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime dateTime;
+    @JsonDeserialize(using = AuditoriumDeserializer.class)
     private Auditorium    auditorium;
 
     public Event() {
