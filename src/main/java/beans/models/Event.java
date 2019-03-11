@@ -1,7 +1,6 @@
 package beans.models;
 
 import beans.json.AuditoriumDeserializer;
-import beans.json.LocalDateDeserializer;
 import beans.json.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 

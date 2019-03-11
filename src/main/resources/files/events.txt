@@ -1,7 +1,12 @@
 [
   { "name":"Pizza party", "rate":"LOW", "basePrice":"60.0", "dateTime":"2016-02-05T21:18", 
 	"auditorium":{
-		"name":"Black Plazza", "seatsNumber":"30", "vipSeats":"1, 3, 5, 6, 11, 15, 17"
+		"id":"1", "name":"Blue hall", "seatsNumber":"500", "vipSeats":"25,26,27,28,29,30,31,32,33,34,35"
+  	}
+  },
+  { "name":"Circus", "rate":"LOW", "basePrice":"85.0", "dateTime":"2018-04-07T21:18", 
+	"auditorium":{
+		"id":"2", "name":"Red hall", "seatsNumber":"800", "vipSeats":"25,26,27,28,29,30,31,32,33,34,35,75,76,77,78,79,80,81,82,83,84,85"
   	}
   }
 ]
