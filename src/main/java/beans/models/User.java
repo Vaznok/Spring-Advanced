@@ -12,29 +12,31 @@ import java.time.LocalDate;
  * Time: 7:35 PM
  */
 public class User {
-
     private long      id;
     private String    email;
     private String    name;
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate birthday;
+    private String roles = UserRole.REGISTERED_USER.name();
+    private String password;
 
     public User() {
     }
 
-    public User(long id, String email, String name, LocalDate birthday) {
+    public User(long id, String email, String name, LocalDate birthday, String password) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.birthday = birthday;
+        this.password = password;
     }
 
-    public User(String email, String name, LocalDate birthday) {
-        this(-1, email, name, birthday);
+    public User(String email, String name, LocalDate birthday, String password) {
+        this(-1, email, name, birthday, password);
     }
 
     public User withId(long id) {
-        return new User(id, email, name, birthday);
+        return new User(id, email, name, birthday, password);
     }
 
     public long getId() {
@@ -67,6 +69,24 @@ public class User {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void addRole(UserRole role) {
+        if(!roles.contains(role.name())) {
+            roles = roles + ", " + role.name();
+        }
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

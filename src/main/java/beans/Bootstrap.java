@@ -42,8 +42,11 @@ public class Bootstrap {
         Auditorium redHall = auditoriumService.getByName("Red hall");
         LocalDateTime dateOfEvent = LocalDateTime.of(LocalDate.of(2016, 2, 5), LocalTime.of(15, 45, 0));
 
-        userService.register(new User(email, name, LocalDate.now()));
-        userService.register(new User("laory@yandex.ru", name, LocalDate.of(1992, 4, 29)));
+        User userVetall = new User("vetall@gmail.com", "Vlasenko Vitalii", LocalDate.of(1990, 3, 14), "12345");
+        userVetall.addRole(UserRole.BOOKING_MANAGER);
+        userService.register(new User(email, name, LocalDate.now(), "12345"));
+        userService.register(new User("laory@yandex.ru", name, LocalDate.of(1992, 4, 29), "12345"));
+        userService.register(userVetall);
 
         User userByEmail = userService.getUserByEmail(email);
         logger.info("User with email: [" + email + "] is " + userByEmail);
