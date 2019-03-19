@@ -2,6 +2,11 @@ package beans.models;
 
 import beans.json.LocalDateDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -20,6 +25,9 @@ public class User {
     private String roles = UserRole.REGISTERED_USER.name();
     private String password;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public User() {
     }
 
@@ -28,7 +36,7 @@ public class User {
         this.email = email;
         this.name = name;
         this.birthday = birthday;
-        this.password = password;
+        this.password = bCryptPasswordEncoder.encode(password);
     }
 
     public User(String email, String name, LocalDate birthday, String password) {
@@ -77,7 +85,7 @@ public class User {
 
     public void addRole(UserRole role) {
         if(!roles.contains(role.name())) {
-            roles = roles + ", " + role.name();
+            roles = roles + "," + role.name();
         }
     }
 
@@ -86,7 +94,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = bCryptPasswordEncoder.encode(password);
     }
 
     @Override
