@@ -13,12 +13,12 @@
 
 <h1>Log in</h1>
 
-<form role="form" action="/trainings/login" method="post">
+<form role="form" action="http://localhost:8080${rc.getContextPath()}/login" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
     <div>
         <label for="email">Email address</label>
-        <input type="email" name="email" id="email" required autofocus/>
+        <input type="username" name="username" id="username" required autofocus/>
     </div>
     <div>
         <label for="password">Password</label>

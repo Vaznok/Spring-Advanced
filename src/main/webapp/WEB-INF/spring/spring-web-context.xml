@@ -28,6 +28,7 @@
         <property name="suffix" value=".ftl"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="order" value="0" />
+        <property name="requestContextAttribute" value="rc"/>
     </bean>
 
     <!-- freemarker config -->
@@ -59,14 +60,20 @@
                 login-page="/login"/>
     </security:http>
 
-    <security:authentication-manager>
+<!--    <security:authentication-manager>
         <security:authentication-provider>
-            <security:user-service>
-                <security:user name="jimi@gmail.com" password="jimispassword" authorities="ROLE_REGISTERED_USER, ROLE_BOOKING_MANAGER" />
-                <security:user name="bob" password="bobspassword" authorities="ROLE_REGISTERED_USER" />
-                <security:user name="vetall" password="vetallspassword" authorities="ROLE_REGISTERED_USER, ROLE_BOOKING_MANAGER" />
-                <security:user name="katy" password="katyspassword" authorities="ROLE_REGISTERED_USER" />
-            </security:user-service>
+            <security:password-encoder hash="sha"/>
+            <security:user-service id=""></security:user-service>
         </security:authentication-provider>
-    </security:authentication-manager>
+    </security:authentication-manager>-->
+
+    <bean id="daoAuthProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="userDetailsServiceImpl"/>
+        <property name="passwordEncoder" ref="encoder"/>
+    </bean>
+
+    <bean id="userDetailsServiceImpl" class="beans.security.UserDetailsServiceImpl"/>
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="11"/>
+    </bean>
 </beans>
