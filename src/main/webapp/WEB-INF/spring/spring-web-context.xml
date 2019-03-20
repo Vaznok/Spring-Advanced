@@ -60,17 +60,16 @@
                 login-page="/login"/>
     </security:http>
 
-<!--    <security:authentication-manager>
-        <security:authentication-provider>
-            <security:password-encoder hash="sha"/>
-            <security:user-service id=""></security:user-service>
+    <security:authentication-manager >
+        <security:authentication-provider user-service-ref="userDetailsServiceImpl">
+            <security:password-encoder ref="encoder"/>
         </security:authentication-provider>
-    </security:authentication-manager>-->
+    </security:authentication-manager>
 
-    <bean id="daoAuthProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-        <property name="userDetailsService" ref="userDetailsServiceImpl"/>
+<!--    <bean id="daoAuthProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="userDetailsServiceImpl"></property>
         <property name="passwordEncoder" ref="encoder"/>
-    </bean>
+    </bean>-->
 
     <bean id="userDetailsServiceImpl" class="beans.security.UserDetailsServiceImpl"/>
     <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
