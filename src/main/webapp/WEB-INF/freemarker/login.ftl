@@ -14,8 +14,6 @@
 <h1>Log in</h1>
 
 <form role="form" action="http://localhost:8080${rc.getContextPath()}/login" method="post">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
     <div>
         <label for="email">Email address</label>
         <input type="username" name="username" id="username" required autofocus/>

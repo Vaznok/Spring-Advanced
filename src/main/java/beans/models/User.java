@@ -2,8 +2,6 @@ package beans.models;
 
 import beans.json.LocalDateDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
@@ -34,7 +32,7 @@ public class User {
         this.name = name;
         this.birthday = birthday;
         this.password = bCryptPasswordEncoder.encode(password);
-        this.roles = UserRole.REGISTERED_USER.name();
+        this.roles = UserRole.ROLE_REGISTERED_USER.name();
     }
 
     public User(String email, String name, LocalDate birthday, String password) {

@@ -1,5 +1,5 @@
 package beans.models;
 
 public enum UserRole {
-    REGISTERED_USER, BOOKING_MANAGER
+    ROLE_REGISTERED_USER, ROLE_BOOKING_MANAGER
 }

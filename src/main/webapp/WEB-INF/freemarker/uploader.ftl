@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form method="post" enctype="multipart/form-data" action="/${rc.getContextPath()}/upload">
+<form method="post" enctype="multipart/form-data" action="http://localhost:8080${rc.getContextPath()}/upload">
     <p>Add users data in json   <input type="file" name="fileUsers"></p>
     <p>Add events data in json   <input type="file" name="fileEvents"></p>
     <p><input type="submit"></p>

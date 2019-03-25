@@ -7,7 +7,6 @@ import beans.models.*;
 import beans.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -49,7 +48,7 @@ public class Bootstrap {
         LocalDateTime dateOfEvent = LocalDateTime.of(LocalDate.of(2016, 2, 5), LocalTime.of(15, 45, 0));
 
         User userVetall = new User("vetall@gmail.com", "Vlasenko Vitalii", LocalDate.of(1990, 3, 14), "12345");
-        userVetall.addRole(UserRole.BOOKING_MANAGER);
+        userVetall.addRole(UserRole.ROLE_BOOKING_MANAGER);
         userService.register(new User(email, name, LocalDate.now(), "12345"));
         userService.register(new User("laory@yandex.ru", name, LocalDate.of(1992, 4, 29), "12345"));
         userService.register(userVetall);

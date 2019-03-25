@@ -56,9 +56,16 @@
         <security:intercept-url pattern="/login" access="permitAll" />
         <security:intercept-url pattern="/tickets*" access="hasRole('ROLE_BOOKING_MANAGER')" />
         <security:intercept-url pattern="/**" access="hasRole('ROLE_REGISTERED_USER')" />
+        <security:csrf disabled="true"/>
         <security:form-login
                 login-page="/login"/>
-    </security:http>
+        <security:remember-me
+                token-validity-seconds="1209600"
+                remember-me-parameter="remember-me"
+                data-source-ref="dataSource"
+                />
+    </security:http> <!--user-service-ref="userDetailsServiceImpl"
+                services-ref="rememberMeServices"-->
 
     <security:authentication-manager >
         <security:authentication-provider user-service-ref="userDetailsServiceImpl">
@@ -66,9 +73,18 @@
         </security:authentication-provider>
     </security:authentication-manager>
 
-<!--    <bean id="daoAuthProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-        <property name="userDetailsService" ref="userDetailsServiceImpl"></property>
-        <property name="passwordEncoder" ref="encoder"/>
+<!--    <bean id="rememberMeFilter" class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
+        <property name="rememberMeServices" ref="rememberMeServices"/>&lt;!&ndash;
+        <property name="authenticationManager" ref="theAuthenticationManager" />&ndash;&gt;
+    </bean>
+
+    <bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+        <property name="userDetailsService" ref="userDetailsServiceImpl"/>
+        <property name="key" value="springRocks"/>
+    </bean>
+
+    <bean id="rememberMeAuthenticationProvider" class="org.springframework.security.authentication.rememberme.RememberMeAuthenticationProvider">
+        <property name="key" value="springRocks"/>
     </bean>-->
 
     <bean id="userDetailsServiceImpl" class="beans.security.UserDetailsServiceImpl"/>
