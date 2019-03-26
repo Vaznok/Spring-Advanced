@@ -19,11 +19,22 @@
             Files location - /resources/files (events.txt, users.txt)
         - WelcomeController
             1. http://localhost:8080/trainings/
+------------------------------------------------------------------------------------------            
 2. SPRING SECURITY
     - To check that remember-me token is saved in datastore
         http://localhost:8080/trainings/h2-console/
         where jdbc url = jdbc:h2:~/data/spring-db
+    Users:
+        login: vetall@gmail.com 
+        pass: 12345
+        ROLE_BOOKING_MANAGER,ROLE_REGISTERED_USER
         
+        login: laory@yandex.ru 
+        pass: 12345
+        ROLE_REGISTERED_USER
+    - Request example only for users with ROLE_BOOKING_MANAGER
+        http://localhost:8080/trainings/tickets?event=The%20revenant&auditorium=Yellow%20hall&dateTime=2016-02-05T21:18
+------------------------------------------------------------------------------------------      
 Deployment:
     1. mvn clean package 
     2. copy trainings.war from /target/ to /webapp/ tomcat folder

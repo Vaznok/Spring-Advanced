@@ -5,6 +5,7 @@
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
     <http auto-config='true' use-expressions="true" create-session="never">
+        <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/login" access="permitAll" />
         <intercept-url pattern="/h2-console/**" access="permitAll" />
         <intercept-url pattern="/tickets*" access="hasRole('ROLE_BOOKING_MANAGER')" />
@@ -14,7 +15,9 @@
             <frame-options policy="SAMEORIGIN"/>
         </headers>
         <form-login login-page="/login"
-                    authentication-failure-url="/login?error"/>
+                    authentication-failure-url="/login?error"
+                    default-target-url="/"/>
+        <logout logout-url="/logout"/>
         <remember-me
                 token-validity-seconds="604800"
                 remember-me-parameter="remember-me"

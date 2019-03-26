@@ -8,7 +8,10 @@
        <h2>Welcome ${username}!</h2>
        <nav role="navigation">
            <ul>
-               <li><a href="/trainings/login?logout">LOGOUT</a></li>
+               <li><a href="/trainings/login">LogIn</a></li>
+           </ul>
+           <ul>
+               <li><a href="/trainings/logout">LogOut</a></li>
            </ul>
        </nav>
     </body>

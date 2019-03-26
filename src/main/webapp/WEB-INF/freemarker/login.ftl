@@ -8,7 +8,7 @@
 
 <h1>Log in</h1>
 
-<form role="form" action="http://localhost:8080${rc.getContextPath()}/login" method="post">
+<form role="form" action="/trainings/login" method="post">
     <div>
         <label for="email">Email address</label>
         <input type="username" name="username" id="username" required autofocus/>
@@ -28,5 +28,10 @@
         <h4>${message}</h4>
     </#if>
 </form>
+<nav role="navigation">
+    <ul>
+        <li><a href="/trainings/">Main page</a></li>
+    </ul>
+</nav>
 </body>
 </html>
