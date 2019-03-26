@@ -34,7 +34,7 @@
 
     <servlet-mapping>
         <servlet-name>H2Console</servlet-name>
-        <url-pattern>/admin/h2/*</url-pattern>
+        <url-pattern>/h2-console/*</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -48,7 +48,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring/spring-web-context.xml</param-value>
+        <param-value>/WEB-INF/spring/*.xml</param-value>
     </context-param>
 
     <listener>

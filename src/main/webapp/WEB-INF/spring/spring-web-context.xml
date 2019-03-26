@@ -4,18 +4,14 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:security="http://www.springframework.org/schema/security"
-       xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/aop
- 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
-        http://www.springframework.org/schema/security
-        http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+ 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
     <mvc:annotation-driven />
     <context:component-scan base-package="beans"/>
@@ -50,45 +46,5 @@
         <!-- one of the properties available; the maximum file size in bytes -->
         <property name="maxUploadSize" value="400000" />
         <property name="maxInMemorySize" value="90000" />
-    </bean>
-
-    <security:http auto-config='true' use-expressions="true">
-        <security:intercept-url pattern="/login" access="permitAll" />
-        <security:intercept-url pattern="/tickets*" access="hasRole('ROLE_BOOKING_MANAGER')" />
-        <security:intercept-url pattern="/**" access="hasRole('ROLE_REGISTERED_USER')" />
-        <security:csrf disabled="true"/>
-        <security:form-login
-                login-page="/login"/>
-        <security:remember-me
-                token-validity-seconds="1209600"
-                remember-me-parameter="remember-me"
-                data-source-ref="dataSource"
-                />
-    </security:http> <!--user-service-ref="userDetailsServiceImpl"
-                services-ref="rememberMeServices"-->
-
-    <security:authentication-manager >
-        <security:authentication-provider user-service-ref="userDetailsServiceImpl">
-            <security:password-encoder ref="encoder"/>
-        </security:authentication-provider>
-    </security:authentication-manager>
-
-<!--    <bean id="rememberMeFilter" class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
-        <property name="rememberMeServices" ref="rememberMeServices"/>&lt;!&ndash;
-        <property name="authenticationManager" ref="theAuthenticationManager" />&ndash;&gt;
-    </bean>
-
-    <bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
-        <property name="userDetailsService" ref="userDetailsServiceImpl"/>
-        <property name="key" value="springRocks"/>
-    </bean>
-
-    <bean id="rememberMeAuthenticationProvider" class="org.springframework.security.authentication.rememberme.RememberMeAuthenticationProvider">
-        <property name="key" value="springRocks"/>
-    </bean>-->
-
-    <bean id="userDetailsServiceImpl" class="beans.security.UserDetailsServiceImpl"/>
-    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-        <constructor-arg name="strength" value="11"/>
     </bean>
 </beans>

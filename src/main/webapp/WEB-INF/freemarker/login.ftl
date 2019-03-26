@@ -5,11 +5,6 @@
     <title>Log in</title>
 </head>
 <body>
-<nav role="navigation">
-    <ul>
-        <li><a href="/">Home</a></li>
-    </ul>
-</nav>
 
 <h1>Log in</h1>
 
@@ -27,6 +22,11 @@
         <input type="checkbox" name="remember-me" id="remember-me"/>
     </div>
     <button type="submit">Sign in</button>
+    <#if error ??>
+        <h4>${error}</h4>
+    <#elseif message ??>
+        <h4>${message}</h4>
+    </#if>
 </form>
 </body>
 </html>
