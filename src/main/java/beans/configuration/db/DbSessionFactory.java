@@ -20,7 +20,6 @@ import java.util.Properties;
  * Time: 4:00 PM
  */
 @Configuration
-@EnableTransactionManagement
 @PropertySource("classpath:db.properties")
 public class DbSessionFactory {
 
@@ -37,6 +36,9 @@ public class DbSessionFactory {
     @Value("${hibernate.hbm2ddl.auto}")
     private String hbm2ddlAuto;
 
+    @Value("")
+    private String thread;
+
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
@@ -45,18 +47,19 @@ public class DbSessionFactory {
             setProperty("hibernate.dialect", dialect);
             setProperty("hibernate.show_sql", showSql);
             setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
+            //setProperty("hibernate.enable_lazy_load_no_trans", true);
         }});
         localSessionFactoryBean.setMappingResources("/mappings/auditorium.hbm.xml", "/mappings/event.hbm.xml",
                                                     "/mappings/ticket.hbm.xml", "/mappings/user.hbm.xml",
-                                                    "/mappings/booking.hbm.xml");
+                                                    "/mappings/booking.hbm.xml", "/mappings/account.hbm.xml");
         return localSessionFactoryBean;
     }
 
-    @Bean
+    /*@Bean
     @Autowired
     public HibernateTransactionManager transactionManager(org.hibernate.SessionFactory sessionFactory) {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(sessionFactory);
         return txManager;
-    }
+    }*/
 }

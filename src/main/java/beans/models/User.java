@@ -4,6 +4,7 @@ import beans.json.LocalDateDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -12,7 +13,7 @@ import java.time.LocalDate;
  * Date: 2/1/2016
  * Time: 7:35 PM
  */
-public class User {
+public class User implements Serializable {
     private long      id;
     private String    email;
     private String    name;
@@ -20,6 +21,7 @@ public class User {
     private LocalDate birthday;
     private String roles;
     private String password;
+    private UserAccount userAccount;
 
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(11);
 
@@ -36,7 +38,7 @@ public class User {
     }
 
     public User(String email, String name, LocalDate birthday, String password) {
-        this(-1, email, name, birthday, password);
+        this(0, email, name, birthday, password);
     }
 
     public User withId(long id) {
@@ -87,6 +89,22 @@ public class User {
         if(!roles.contains(role.name())) {
             roles = roles + "," + role.name();
         }
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+
+    public BCryptPasswordEncoder getbCryptPasswordEncoder() {
+        return bCryptPasswordEncoder;
+    }
+
+    public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public String getPassword() {

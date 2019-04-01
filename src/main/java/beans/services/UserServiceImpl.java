@@ -3,6 +3,7 @@ package beans.services;
 import beans.daos.UserDAO;
 import beans.models.Ticket;
 import beans.models.User;
+import beans.models.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User register(User user) {
+        user.setUserAccount(new UserAccount(user, 0.00));
         return userDAO.create(user);
     }
 

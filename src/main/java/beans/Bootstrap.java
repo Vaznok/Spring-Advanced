@@ -37,6 +37,7 @@ public class Bootstrap {
         EventService eventService = (EventService) ctx.getBean("eventServiceImpl");
         UserService userService = (UserService) ctx.getBean("userServiceImpl");
         DiscountService discountService = (DiscountService) ctx.getBean("discountServiceImpl");
+        UserAccountService userAccountService = (UserAccountService) ctx.getBean("userAccountServiceImpl");
 
         String email = "dmitriy.vbabichev@gmail.com";
         String name = "Dmytro Babichev";
@@ -47,19 +48,27 @@ public class Bootstrap {
         Auditorium redHall = auditoriumService.getByName("Red hall");
         LocalDateTime dateOfEvent = LocalDateTime.of(LocalDate.of(2016, 2, 5), LocalTime.of(15, 45, 0));
 
+        //Set one to one relationship
         User userVetall = new User("vetall@gmail.com", "Vlasenko Vitalii", LocalDate.of(1990, 3, 14), "12345");
+        User userBabichev = new User(email, name, LocalDate.now(), "12345");
+        User userBabichev2 = new User("laory@yandex.ru", name, LocalDate.of(1992, 4, 29), "12345");
         userVetall.addRole(UserRole.ROLE_BOOKING_MANAGER);
-        userService.register(new User(email, name, LocalDate.now(), "12345"));
-        userService.register(new User("laory@yandex.ru", name, LocalDate.of(1992, 4, 29), "12345"));
-        userService.register(userVetall);
+        UserAccount userAccountVetall = new UserAccount(userVetall, 2500.00);
+        UserAccount userAccountBabichev = new UserAccount(userBabichev, 1000.00);
+        UserAccount userAccountBabichev2 = new UserAccount(userBabichev2, 30.00);
+        userVetall.setUserAccount(userAccountVetall);
+        userBabichev.setUserAccount(userAccountBabichev);
+        userBabichev2.setUserAccount(userAccountBabichev2);
+
+        userAccountService.create(userAccountVetall);
+        userAccountService.create(userAccountBabichev);
+        userAccountService.create(userAccountBabichev2);
 
         User userByEmail = userService.getUserByEmail(email);
         logger.info("User with email: [" + email + "] is " + userByEmail);
 
-
         logger.info("All users with name: [" + name + "] are: ");
         userService.getUsersByName(name).forEach(System.out:: println);
-
 
         Event event1 = eventService.create(
                 new Event(eventName, Rate.HIGH, 60, LocalDateTime.of(LocalDate.of(2016, 2, 5), LocalTime.of(9, 0, 0)),
@@ -138,9 +147,7 @@ public class Bootstrap {
         logger.info("CounterAspect.getAccessByNameStat() = " + CounterAspect.getAccessByNameStat());
         logger.info("CounterAspect.getGetPriceByNameStat() = " + CounterAspect.getGetPriceByNameStat());
         logger.info("CounterAspect.getBookTicketByNameStat() = " + CounterAspect.getBookTicketByNameStat());
-
         logger.info("DiscountAspect.getDiscountStatistics() = " + DiscountAspect.getDiscountStatistics());
-
         logger.info("LuckyWinnerAspect.getLuckyUsers() = " + LuckyWinnerAspect.getLuckyUsers());
     }
 }

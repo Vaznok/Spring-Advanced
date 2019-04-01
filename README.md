@@ -35,6 +35,21 @@
     - Request example only for users with ROLE_BOOKING_MANAGER
         http://localhost:8080/trainings/tickets?event=The%20revenant&auditorium=Yellow%20hall&dateTime=2016-02-05T21:18
 ------------------------------------------------------------------------------------------      
+3. SPRING TRANSACTIONS
+    - To check added user account profile        
+        http://localhost:8080/trainings/account
+        http://localhost:8080/trainings/account?email=vetall@gmail.com
+    - To check booking operation
+        http://localhost:8080/trainings/book
+        
+            Event: The revenant
+            Auditorium: Yellow hall
+            DateTime: 2016-02-05T21:18
+            Seat: 20 or 21 or 22
+            
+        Success operation for user login: vetall@gmail.com password: 12345
+        Failed operation for user login: laory@yandex.ru password: 12345
+------------------------------------------------------------------------------------------ 
 Deployment:
     1. mvn clean package 
     2. copy trainings.war from /target/ to /webapp/ tomcat folder
