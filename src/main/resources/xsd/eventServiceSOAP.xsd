@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://soap.services/event-web-service"
+           xmlns:tns="http://soap.services/event-web-service">
+
+    <xs:element name="getAll" type="tns:getAll"/>
+    <xs:element name="getAllResponse" type="tns:getAllResponse"/>
+    <xs:element name="getAllRequest" type="tns:getAllRequest"/>
+</xs:schema>
+

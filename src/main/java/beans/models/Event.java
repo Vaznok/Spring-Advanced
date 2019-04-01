@@ -2,8 +2,14 @@ package beans.models;
 
 import beans.json.AuditoriumDeserializer;
 import beans.json.LocalDateTimeDeserializer;
+import beans.soap.adapter.LocalDateTimeAdapter;
+import beans.soap.adapter.RateAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
 
 /**
@@ -12,12 +18,17 @@ import java.time.LocalDateTime;
  * Date: 2/1/2016
  * Time: 7:42 PM
  */
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Event {
 
     private long          id;
     private String        name;
+    @XmlJavaTypeAdapter(RateAdapter.class)
     private Rate          rate;
     private double        basePrice;
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime dateTime;
     @JsonDeserialize(using = AuditoriumDeserializer.class)

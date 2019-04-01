@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://soap.services/event-web-service"
+           elementFormDefault="qualified">
+
+  <xs:element name="event" type="event"/>
+
+  <xs:complexType name="event">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="rate" type="xs:string" minOccurs="0"/>
+      <xs:element name="basePrice" type="xs:double"/>
+      <xs:element name="dateTime" type="xs:string" minOccurs="0"/>
+      <xs:element name="auditorium" type="auditorium" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="auditorium">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="seatsNumber" type="xs:int"/>
+      <xs:element name="vipSeats" type="xs:string" minOccurs="0"/>
+      <xs:element name="vipSeatsList" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

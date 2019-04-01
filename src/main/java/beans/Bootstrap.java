@@ -7,6 +7,7 @@ import beans.models.*;
 import beans.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -25,10 +26,6 @@ public class Bootstrap {
 
     @Autowired
     private ApplicationContext ctx;
-
-    public static void main(String[] args) {
-        System.out.println(new BCryptPasswordEncoder(11).matches("12345", "$2a$11$hbS403CuCObsIEA0mcK2ZeDcFw5tXO/5.ru7uYh.DSlhuIrwWweru"));
-    }
 
     @PostConstruct
     public void init() {

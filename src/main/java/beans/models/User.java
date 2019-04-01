@@ -1,9 +1,15 @@
 package beans.models;
 
 import beans.json.LocalDateDeserializer;
+import beans.soap.adapter.LocalDateAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -13,16 +19,19 @@ import java.time.LocalDate;
  * Date: 2/1/2016
  * Time: 7:35 PM
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class User implements Serializable {
     private long      id;
     private String    email;
     private String    name;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate birthday;
     private String roles;
     private String password;
     private UserAccount userAccount;
-
+    @XmlTransient
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(11);
 
     public User() {
